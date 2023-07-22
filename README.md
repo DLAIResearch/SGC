@@ -18,14 +18,14 @@ Deep neural networks have revolutionized computer vision tasks with their except
 
 #### Train and evaluate ResNet18 and ResNet50 models on the ImageNet dataset using our method
 ```
-CUDA_VISIBLE_DEVICES=0,1,2,3 python train_eval_SGC.py /datasets/imagenet -a resnet50 -p 100 -j 8 -b 192 --lr 0.01 --lambda 0.5 -t 0.5 --save_dir <SAVE_DIR> --log_dir <LOG_DIR>
-CUDA_VISIBLE_DEVICES=0,1,2,3 python train_eval_SGC.py /datasets/imagenet -a resnet50 -p 100 -j 8 -b 256 --lr 0.01 --lambda 0.5 -t 0.5 --save_dir <SAVE_DIR> --log_dir <LOG_DIR>
+CUDA_VISIBLE_DEVICES=0,1,2,3 python train_eval_sgc.py /datasets/imagenet -a resnet50 -p 100 -j 8 -b 192 --lr 0.01 --lambda 0.5 -t 0.5 --save_dir <SAVE_DIR> --log_dir <LOG_DIR>
+CUDA_VISIBLE_DEVICES=0,1,2,3 python train_eval_sgc.py /datasets/imagenet -a resnet50 -p 100 -j 8 -b 256 --lr 0.01 --lambda 0.5 -t 0.5 --save_dir <SAVE_DIR> --log_dir <LOG_DIR>
 ```
 #### Train and evaluate a ResNet50 model on 1pc labeled subset of the ImageNet-100 dataset and the rest as an unlabeled dataset. We initialize the model from SwAV
 For the below command, <PATH_TO_SWAV_MODEL_PRETRAINED> can be downloaded from the github directory of SwAV - https://github.com/facebookresearch/swav
 We use the model checkpoint listed on the first row (800 epochs, 75.3% ImageNet top-1 acc.) of the Model Zoo of the above repository.
 ```
-CUDA_VISIBLE_DEVICES=0,1 python train_imagenet_1pc_swav_SGC_unlabeled.py <PATH_TO_1%_IMAGENET-100> -a resnet50 -b 128 -j 8 --lambda 0.5 -t 0.5 --epochs 50 --lr 0.02 --lr_last_layer 5 --resume <PATH_TO_SWAV_MODEL_PRETRAINED> --save_dir <SAVE_DIR> --log_dir <LOG_DIR> 2>&1 | tee <PATH_TO_CMD_LOG_FILE>
+CUDA_VISIBLE_DEVICES=0,1 python train_imagenet_1pc_swav_sgc_unlabeled.py <PATH_TO_1%_IMAGENET-100> -a resnet50 -b 128 -j 8 --lambda 0.5 -t 0.5 --epochs 50 --lr 0.02 --lr_last_layer 5 --resume <PATH_TO_SWAV_MODEL_PRETRAINED> --save_dir <SAVE_DIR> --log_dir <LOG_DIR> 2>&1 | tee <PATH_TO_CMD_LOG_FILE>
 ```
 #### Evaluate model checkpoint using Content Heatmap (CH) evaluation metric
 We use the evaluation code adapted from the TorchRay framework.
