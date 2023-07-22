@@ -20,7 +20,7 @@ import datasets as pointing_datasets
 from pointing_game import PointingGameBenchmark
 
 """ 
-    Here, we evaluate using the stochastic pointing game metriic on imagenet dataset 
+    Here, we evaluate using the stochastic pointing game metriic on imagenet-100 dataset 
     by using the bbox annotations on the val dataset.
 """
 
@@ -40,7 +40,7 @@ parser.add_argument('--pretrained', dest='pretrained', action='store_true',
                     help='use pre-trained model')
 parser.add_argument('-g', '--num-gpus', default=1, type=int,
                     metavar='N', help='number of GPUs to match (default: 4)')
-parser.add_argument('--resume',default='env/model_best.pth-imagenet-50-0.6.tar',  type=str, metavar='PATH',
+parser.add_argument('--resume',default='env/model',  type=str, metavar='PATH',
                     help='path to latest checkpoint (default: none)')
 parser.add_argument('--input_resize', default=224, type=int,
                     metavar='N', help='Resize for smallest side of input (default: 224)')
