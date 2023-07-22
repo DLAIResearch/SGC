@@ -91,7 +91,9 @@ parser.add_argument('--world-size', default=-1, type=int,
                     help='number of nodes for distributed training')
 parser.add_argument('--rank', default=-1, type=int,
                     help='node rank for distributed training')
-parser.add_argument('--dist-backend', default='nccl', type=str,
+parser.add_argument('--dist-url', default=None, type=str,
+                    help='url used to set up distributed training')
+parser.add_argument('--dist-backend', default=None, type=str,
                     help='distributed backend')
 parser.add_argument('--seed', default=None, type=int,
                     help='seed for initializing training. ')
@@ -111,8 +113,8 @@ parser.add_argument("--gamma", type=float, default=0.2, help="lr decay factor")
 parser.add_argument('-t', type=float, default=0.5)
 parser.add_argument('--lambda', default=0.5, type=float,
                     metavar='LAM', help='lambda hyperparameter for SGC loss', dest='lambda_val')
-parser.add_argument('--log_dir', default='logs-imagenet-ublib_0.01-0.5', type=str, metavar='LG_PATH',
-                    help='path to write logs=cub-base=cars (default: logs=cub-base=cars)')
+parser.add_argument('--log_dir', default='logs', type=str, metavar='LG_PATH',
+                    help='path to write logs (default: logs)')
 
 best_acc1 = 0
 
@@ -268,8 +270,8 @@ def main_worker(gpu, ngpus_per_node, args, logger):
     cudnn.benchmark = True
 
     # Data loading code
-    traindir = os.path.join('ImageNet', 'train_ulable')
-    unlabeleddir = os.path.join('ImageNet', 'train')
+    traindir = os.path.join('ImageNet', 'train')
+    unlabeleddir = os.path.join('ImageNet', 'train_ulable')
     valdir = os.path.join(args.data, 'val')
     normalize = transforms.Normalize(mean=[0.485, 0.456, 0.406],
                                      std=[0.229, 0.224, 0.225])
@@ -394,12 +396,6 @@ def train(train_loader, unlabeled_loader, model, contrastive_criterion, xent_cri
         target = target.cuda(args.gpu, non_blocking=True)
         unlbl_images = unlbl_images.cuda(args.gpu, non_blocking=True)
         unlbl_aug_images = unlbl_aug_images.cuda(args.gpu, non_blocking=True)
-        # aug_params_dict = {'transforms_i': transforms_i, 'transforms_j': transforms_j, 'transforms_h': transforms_h,
-        #                     'transforms_w': transforms_w, 'hor_flip': hor_flip}
-
-        # lbl_output, xe_loss, contrastive_loss = model(lbl_images, contrastive_criterion=contrastive_criterion,
-        #                                               unlbl_images=unlbl_images, unlbl_aug_images=unlbl_aug_images,
-        #                                               aug_params_dict=aug_params_dict, targets=target, xent_criterion=xent_criterion)
         lbl_output, xe_loss, contrastive_loss = model(lbl_images, contrastive_criterion=contrastive_criterion,   unlbl_images=unlbl_images, unlbl_aug_images=unlbl_aug_images,
                                                       pred=pred, targets=target, xent_criterion=xent_criterion)
 
