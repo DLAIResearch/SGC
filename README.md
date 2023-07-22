@@ -12,7 +12,9 @@ Code uploading in progress--
  - [FGVC-Aircraft](https://www.robots.ox.ac.uk/~vgg/data/fgvc-aircraft/)
  - [Stanford Cars-196](https://ai.stanford.edu/~jkrause/cars/car_dataset.html)
  - [VGG Flowers-102](https://www.robots.ox.ac.uk/~vgg/data/flowers/102/)
-
+## Checkpoints
+* u2net  pre-trained model - [link](https://drive.google.com/drive/folders/1n7lFew0CdWuYCpR1kImMt7UC7_vsO5CT?usp=sharing](https://drive.google.com/u/0/uc?id=1ao1ovG1Qtx4b7EoskHXmi2E9rp5CHLcZ&export=download)
+* [link](https://github.com/xuebinqin/U-2-Net)
 ## Training
 
 #### Train and evaluate ResNet18 and ResNet50 model on the ImageNet dataset using our method
