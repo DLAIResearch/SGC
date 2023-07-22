@@ -318,9 +318,8 @@ class ResNet(nn.Module):
         accumulating them later.
         :param lbl_images: Labeled images to be used for computing cross-entropy loss
         :param contrastive_criterion: Contrastive Loss criterion
-        :param unlbl_images: Unlabeled images for CGC
-        :param unlbl_aug_images: Unlabeled augmented images for CGC
-        :param aug_params_dict: pytorch augmentation params corresponding to images --> aug_images transform
+        :param unlbl_images: Unlabeled images for SGC
+        :param unlbl_aug_images: Unlabeled augmented images for SGC
         :param targets: labels to be used for cross-entropy loss
         :param xent_criterion: Cross-entropy criterion 
         :param vanilla: If True, return the outputs from a regular forward pass through the model
