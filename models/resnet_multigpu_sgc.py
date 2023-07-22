@@ -125,7 +125,7 @@ def normalize(x):
 
 class ResNet(nn.Module):
 
-    def __init__(self, block, layers, num_classes=1000, zero_init_residual=False,
+    def __init__(self, block, layers, num_classes=100, zero_init_residual=False,
                  groups=1, width_per_group=64, replace_stride_with_dilation=None,
                  norm_layer=None):
         super(ResNet, self).__init__()
@@ -210,8 +210,6 @@ class ResNet(nn.Module):
         :param images:
         :param contrastive_criterion: crtierion for contrastive loss
         :param xe_images: images to be used for computing cross-entropy loss
-        :param aug_images: augmentation applied to images to be used for computing CGC loss 
-        :param aug_params_dict: pytorch augmentation params corresponding to images --> aug_images transform
         :param targets: labels to be used for cross-entropy loss
         :param xent_criterion: cross-entropy loss criterion
         :param vanilla: If True, return the outputs from a regular forward pass through the model
