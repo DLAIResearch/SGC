@@ -33,7 +33,7 @@ parser.add_argument('--pretrained', dest='pretrained', action='store_true',
                     help='use pre-trained model')
 parser.add_argument('-g', '--num-gpus', default=0, type=int,
                     metavar='N', help='number of GPUs to match (default: 4)')
-parser.add_argument('--resume', default='env/model/model_best.pth-imagenet-50-0.6.tar', type=str, metavar='PATH',
+parser.add_argument('--resume', default='env/model', type=str, metavar='PATH',
                     help='path to latest checkpoint (default: none)')
 parser.add_argument('--input_resize', default=224, type=int,
                     metavar='N', help='Resize for smallest side of input (default: 224)')
@@ -68,8 +68,6 @@ def main():
 
     normalize = transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
 
-    # Here, we don't resize the images. We feed the full image and use AdaptivePooling before FC.
-    # We will resize Gradcam heatmap to image size and compare the actual bbox co-ordinates
     val_dataset = pointing_datasets.ImageNetDetection(args.data,
                                                       transform=transforms.Compose([
                                                           transforms.Resize(args.input_resize),
