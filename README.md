@@ -26,6 +26,14 @@ We use the model checkpoint listed on the first row (800 epochs, 75.3% ImageNet 
 ```
 CUDA_VISIBLE_DEVICES=0,1 python train_imagenet_1pc_swav_SGC_unlabeled.py <PATH_TO_1%_IMAGENET-100> -a resnet50 -b 128 -j 8 --lambda 0.5 -t 0.5 --epochs 50 --lr 0.02 --lr_last_layer 5 --resume <PATH_TO_SWAV_MODEL_PRETRAINED> --save_dir <SAVE_DIR> --log_dir <LOG_DIR> 2>&1 | tee <PATH_TO_CMD_LOG_FILE>
 ```
+#### Evaluate model checkpoint using Content Heatmap (CH) evaluation metric
+We use the evaluation code adapted from the TorchRay framework.
+* Change directory to TorchRay and install the library. Please refer to the [TorchRay](https://github.com/facebookresearch/TorchRay) repository for full documentation and instructions.
+    * cd TorchRay
+    * python setup.py install
+
+* Change directory to TorchRay/torchray/benchmark
+    * cd torchray/benchmark
 ## Evaluation
 
 * For the ImageNet-100, CUb-200 and Stanfordcars datasets, this evaluation requires the following structure for validation images and bounding box xml annotations
