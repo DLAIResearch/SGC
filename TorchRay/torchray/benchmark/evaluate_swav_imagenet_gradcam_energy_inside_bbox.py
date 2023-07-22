@@ -84,8 +84,6 @@ def main():
     normalize = transforms.Normalize(mean=[0.485, 0.456, 0.406],
                                          std=[0.229, 0.224, 0.225])
 
-    # In the version, we will not resize the images. We feed the full image and use AdaptivePooling before FC.
-    # We will resize Gradcam heatmap to image size and compare the actual bbox co-ordinates
     val_dataset = pointing_datasets.ImageNetDetection(args.data,
                                                       transform=transforms.Compose([
                                                           transforms.Resize(args.input_resize),
