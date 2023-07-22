@@ -44,30 +44,3 @@ def compute_gradcam_mask(images_outputs, images_feats , target, relu):
     gradcam_mask = (gradcam_mask / (gradcam_mask_sum + eps)) + eps
 
     return gradcam_mask
-
-
-def perform_gradcam_aug(orig_gradcam_mask, aug_params_dict):
-    """
-    This function uses the augmentation params per batch element and manually applies to the 
-    grad-cam mask to obtain the corresponding augmented grad-cam mask.
-    """
-    transforms_i = aug_params_dict['transforms_i']
-    transforms_j = aug_params_dict['transforms_j']
-    transforms_h = aug_params_dict['transforms_h']
-    transforms_w = aug_params_dict['transforms_w']
-    hor_flip = aug_params_dict['hor_flip']
-    gpu_batch_len = transforms_i.shape[0]
-    augmented_orig_gradcam_mask = torch.zeros_like(orig_gradcam_mask).cuda()
-    for b in range(gpu_batch_len):
-        # convert orig_gradcam_mask to image
-        orig_gcam = orig_gradcam_mask[b]
-        orig_gcam = orig_gcam[transforms_i[b]: transforms_i[b] + transforms_h[b],
-                    transforms_j[b]: transforms_j[b] + transforms_w[b]]
-        # We use torch functional to resize without breaking the graph
-        orig_gcam = orig_gcam.unsqueeze(0).unsqueeze(0)
-        orig_gcam = F.interpolate(orig_gcam, size=224, mode='bilinear')
-        orig_gcam = orig_gcam.squeeze()
-        if hor_flip[b]:
-            orig_gcam = orig_gcam.flip(-1)
-        augmented_orig_gradcam_mask[b, :, :] = orig_gcam[:, :]
-    return augmented_orig_gradcam_mask
