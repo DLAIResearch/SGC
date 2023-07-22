@@ -1,9 +1,9 @@
 # Enhancing Consistent Visual Explanations through Saliency-Guided Contrastive Learning
 Deep neural networks have revolutionized computer vision tasks with their exceptional performance. However, their lack of interpretability has raised concerns and sparked the need for effective explanation techniques. While various methods have been proposed, recent investigations have revealed biases that result in explanations inconsistent with human knowledge. Our solution: a breakthrough approach that tackles this challenge head-on. Rather than proposing a new method of interpretation, this study instructs models on how to learn unbiased features that lead to explanations that are more consistent with the task and humans' priors, given existing methods of interpretation.
 
-![Image text](https://github.com/DLAIResearch/SGC/misc/teaser_image.jpg)
+![Teaser image][teaser]
+[teaser]: https://github.com/DLAIResearch/SGC/misc/teaser_image.jpg
 <br/>
-Code uploading in progress--
 ## Pre-requisites
 - Pytorch 1.3 - Please install [PyTorch](https://pytorch.org/get-started/locally/) and CUDA if you don't have it installed.
 - ## Datasets
@@ -13,8 +13,8 @@ Code uploading in progress--
  - [Stanford Cars-196](https://ai.stanford.edu/~jkrause/cars/car_dataset.html)
  - [VGG Flowers-102](https://www.robots.ox.ac.uk/~vgg/data/flowers/102/)
 ## Checkpoints
-* u2net  pre-trained model - [link](https://drive.google.com/drive/folders/1n7lFew0CdWuYCpR1kImMt7UC7_vsO5CT?usp=sharing](https://drive.google.com/u/0/uc?id=1ao1ovG1Qtx4b7EoskHXmi2E9rp5CHLcZ&export=download)
-* [link](https://github.com/xuebinqin/U-2-Net)
+* U-2-Net pre-trained model - [link](https://drive.google.com/drive/folders/1n7lFew0CdWuYCpR1kImMt7UC7_vsO5CT?usp=sharing](https://drive.google.com/u/0/uc?id=1ao1ovG1Qtx4b7EoskHXmi2E9rp5CHLcZ&export=download)
+* U-2-Net github [link](https://github.com/xuebinqin/U-2-Net)
 ## Training
 
 #### Train and evaluate ResNet18 and ResNet50 model on the ImageNet dataset using our method
