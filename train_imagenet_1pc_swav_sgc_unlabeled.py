@@ -377,14 +377,12 @@ def train(train_loader, unlabeled_loader, model, contrastive_criterion, xent_cri
     for i in range(train_len):
         try:
             _, unlbl_images, unlbl_aug_images, pred, _ = unlabeled_iter.__next__()
-            # _, unlbl_images, unlbl_aug_images, transforms_i, transforms_j, transforms_h, \
-            # transforms_w, hor_flip, _ = unlabeled_iter.__next__()
+
         except StopIteration:
             # reset the unlabeled iterator if exhausted
             unlabeled_iter = iter(unlabeled_loader)
             _, unlbl_images, unlbl_aug_images, pred, _ = unlabeled_iter.__next__()
-            # _, unlbl_images, unlbl_aug_images, transforms_i, transforms_j, transforms_h, \
-            # transforms_w, hor_flip, _ = unlabeled_iter.__next__()
+
 
         # no need for stop iteration since we loop over length of trainloader
         lbl_images, target = train_iter.__next__()
